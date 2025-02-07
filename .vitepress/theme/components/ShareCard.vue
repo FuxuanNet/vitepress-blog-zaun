@@ -4,7 +4,7 @@
       <span>你好呀，我是福轩 👋</span>
     </h1>
     <p class="description">
-      A frontend developer(he/him) who is building in web3.
+      开始实验！
     </p>
   </div>
 </template>
