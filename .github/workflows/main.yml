@@ -28,32 +28,32 @@ jobs:
         with:
           node-version: 20
           
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: Setup npm
+        uses: npm/action-setup@v2
         with:
           version: 8
           
-      - name: Get pnpm store directory
+      - name: Get npm store directory
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          echo "STORE_PATH=$(npm store path --silent)" >> $GITHUB_ENV
 
       - uses: actions/cache@v4
-        name: Setup pnpm cache
+        name: Setup npm cache
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-npm-store-${{ hashFiles('**/npm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-npm-store-
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install --frozen-lockfile
         
       - name: Build
-        run: pnpm run build
+        run: npm run build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2  # 使用 v2 版本
