@@ -56,7 +56,7 @@ jobs:
         run: npm run build
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # 使用 v2 版本
+        uses: actions/upload-pages-artifact@v4  # 更新到 v4 版本
         with:
           path: ./.vitepress/dist  # 确保这个路径和你的项目输出路径一致
 
