@@ -2,7 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [master]  # 改为你当前的 master 分支
+    branches: [master]  # 如果使用的是 master 分支
   workflow_dispatch:
 
 permissions:
@@ -22,38 +22,21 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          
-      - name: Get npm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(npm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v4
-        name: Setup npm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-npm-store-${{ hashFiles('**/npm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-store-
-          
+          cache: npm
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
       - name: Install dependencies
-        run: npm install --frozen-lockfile
-        
-      - name: Build
-        run: npm run build
-        
+        run: npm ci
+      - name: Build with VitePress
+        run: npm run build  # 修改为你的构建命令
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # 更新到 v2 版本
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ./.vitepress/dist  # 确保这个路径和你的项目输出路径一致
+          path: docs/.vitepress/dist  # 构建结果目录
 
   deploy:
     environment:
