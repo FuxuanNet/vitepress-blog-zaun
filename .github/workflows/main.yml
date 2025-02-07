@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - main  # 触发工作流的分支
+      - master  # 触发工作流的分支
 
 jobs:
   build-and-deploy:
