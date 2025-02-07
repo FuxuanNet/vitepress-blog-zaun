@@ -2,15 +2,13 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [master]  # 改为 master 分支
+    branches: [master]  # 使用 master 分支
 
-# 设置 GITHUB_TOKEN 的权限
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 允许一个并发部署
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -44,7 +42,7 @@ jobs:
         run: pnpm run build
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4  # 更新到 v4 版本
+        uses: actions/upload-pages-artifact@v2  # 改回 v2 版本
         with:
           path: ./.vitepress/dist
 
@@ -58,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4  # 更新到 v4 版本
+        uses: actions/deploy-pages@v3  # 使用 v3 版本
