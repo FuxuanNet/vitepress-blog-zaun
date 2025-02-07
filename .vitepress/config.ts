@@ -7,7 +7,7 @@ async function config() {
   return {
     base: '/vitepress-blog-zaun/',
     lang: "en-US",
-    title: "Clark Cui",
+    title: "福轩的测试网站",
     description: "Home of Clark Cui",
     head: [
       [
